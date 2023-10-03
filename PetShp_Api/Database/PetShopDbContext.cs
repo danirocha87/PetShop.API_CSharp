@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PetShop_Api.Domain.Entities;
 
 namespace PetShop_Api.DataBase
 {
@@ -9,6 +10,11 @@ namespace PetShop_Api.DataBase
         //esse option vai receber uma string de conexão, por isso precisa passar para a classe base
 
         public PetShopDbContext(DbContextOptions<PetShopDbContext> options) : base(options) 
-        { }
+        {
+
+        }
+        //AQUI EU ESTOU DIZENDO PARA MEU BANCO DE DADOS QUE VOU TER UMA TABELA DE EMPLOYEE
+        //Dbset é uma tabela no banco de dados 
+       public DbSet<Employee> Employees { get; set; }
     }
 }

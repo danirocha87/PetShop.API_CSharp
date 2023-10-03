@@ -33,7 +33,7 @@ namespace PetShp_Api
             var connectionString = builder.Configuration.GetConnectionString("Default");
 
             //aqui estou usando porque deixei a senha secreta
-            var dbPassword = builder.Configuration["DatabasePassord"];
+            var dbPassword = builder.Configuration["DatabasePassword"];
 
             //faço isso porque deixei minha senha secreta.
             var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString);

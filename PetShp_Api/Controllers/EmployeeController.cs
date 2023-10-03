@@ -1,6 +1,11 @@
 ﻿//1A - importação 
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using PetShop_Api.DataBase;
+using PetShop_Api.Domain.Entities;
+using PetShop_Api.Domain.Requests;
 using System.Net.Mime;
+using System.Security.Cryptography;
 
 namespace PetShp_Api.Controllers
 
@@ -13,16 +18,27 @@ namespace PetShp_Api.Controllers
     /// </summary>
     [ApiController]
     //6-aqui eu coloco a rota que esta minha API, o que eu quero acessar
-    [Route("api/colaboradores")]
+    [Route("api/employees")]
 
 
     //1 -- para criar a APIWEB eu herdo : da controllerBase
     //e importo o using 
-    public class ColaboradoresController : ControllerBase
+    public class EmployeeController : ControllerBase
 
     {
-        //7- aqui uso o httpGet porque quero pegar a minha informação.
+        
+        //aqui eu adiciono um filder, uma variavel private
+        private readonly PetShopDbContext petshopDbContext;
 
+        //aqui uso injeção de depencia 
+        public EmployeeController(PetShopDbContext petShopDbContext)
+        {
+            this.petshopDbContext = petShopDbContext;
+        }
+
+
+
+        //7- aqui uso o httpGet porque quero pegar a minha informação.
         [HttpGet]
         //7- aqui uso o  [HttpGet] porque quero pegar a minha informação.
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -75,6 +91,34 @@ namespace PetShp_Api.Controllers
             if (id >= colaboradores.Length || id < 0)
                 return NotFound();
             return new OkObjectResult(colaboradores[id]);
+        }
+        //a partir de agora começo a fazer o POST
+        //1-aqui uso o[HttpGet] porque quero pegar a minha informação.
+        [HttpPost]
+        
+        //2- aqui eu dou o nome que quiser no caso vou chamar de CreateEmployee
+        //por parametro preciso receber as informações do employee
+        //entãi eu crio uma tabela de colaboradores no caso em ingles
+        // createEmployee a classe que eu criei para receber meus parametros
+        //não esquecer de importa o using
+        public IActionResult CreateEmployee(CreateEmployeeRequest request)
+        {
+            //aqui eu criei uma entidade do tipo employee 
+            var entity = new Employee()
+            {
+                Name = request.EmployeeName,
+                Email = request.EmployeeEmail
+            };
+            
+ 
+
+            //aqui eu vou no petshodbcontext e adiciono um employee
+            petshopDbContext.Employees.Add(entity);
+            //aqui eu quero salvar no banco o que mandie antes
+            petshopDbContext.SaveChanges();
+
+
+            return Ok();   
         }
     }
 }

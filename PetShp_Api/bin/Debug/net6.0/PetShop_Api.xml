@@ -4,12 +4,12 @@
         <name>PetShop_Api</name>
     </assembly>
     <members>
-        <member name="T:PetShp_Api.Controllers.ColaboradoresController">
+        <member name="T:PetShp_Api.Controllers.EmployeeController">
             <summary>
             Controller utilizado para operações de CRUD para colaboradores
             </summary>
         </member>
-        <member name="M:PetShp_Api.Controllers.ColaboradoresController.Get(System.Int32)">
+        <member name="M:PetShp_Api.Controllers.EmployeeController.Get(System.Int32)">
             <summary>
             Retorno das informações sobre o colaborador com <paramref name="id"/>
             </summary>
@@ -17,6 +17,18 @@
             <response code ="200">Retorna os dados do colaborador quando encontrado</response>
             <response code ="404">Colaborador não encontrado</response>
             
+        </member>
+        <member name="T:PetShop_Api.Migrations.CreateDatabase">
+            <inheritdoc />
+        </member>
+        <member name="M:PetShop_Api.Migrations.CreateDatabase.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PetShop_Api.Migrations.CreateDatabase.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:PetShop_Api.Migrations.CreateDatabase.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
         </member>
     </members>
 </doc>
